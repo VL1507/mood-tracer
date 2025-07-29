@@ -19,3 +19,10 @@ precommit:
 	make format_check
 	make test
 	make type_check
+
+
+migrate-create:
+	alembic revision --autogenerate -m ${MES}
+
+migrate-apply:
+	alembic upgrade head
