@@ -9,6 +9,7 @@ dependencies = [
     "pydantic[email]>=2.11.7",
     "python-jose[cryptography]>=3.5.0",
     "python-multipart>=0.0.20",
+    "sqlalchemy>=2.0.41",
 ]
 
 [dependency-groups]
