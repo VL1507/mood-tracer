@@ -1,0 +1,56 @@
+-- database: ./mood.db
+
+CREATE TABLE IF NOT EXISTS "mood_activities" (
+	"id" INTEGER NOT NULL UNIQUE,
+	"activities_id" INTEGER NOT NULL,
+	"mood_id" INTEGER NOT NULL,
+	PRIMARY KEY("id"),
+	FOREIGN KEY ("mood_id") REFERENCES "mood"("id")
+	ON UPDATE NO ACTION ON DELETE NO ACTION,
+	FOREIGN KEY ("activities_id") REFERENCES "activities"("id")
+	ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS "user" (
+	"id" INTEGER NOT NULL UNIQUE,
+	"email" VARCHAR NOT NULL UNIQUE,
+	"password_hash" VARCHAR NOT NULL,
+	"create_at" TIMESTAMP NOT NULL,
+	PRIMARY KEY("id")
+);
+
+CREATE TABLE IF NOT EXISTS "emotions" (
+	"id" INTEGER NOT NULL UNIQUE,
+	"name" VARCHAR NOT NULL,
+	"color_hex" VARCHAR NOT NULL,
+	PRIMARY KEY("id")
+);
+
+CREATE TABLE IF NOT EXISTS "mood" (
+	"id" INTEGER NOT NULL UNIQUE,
+	"user_id" INTEGER NOT NULL,
+	"score" INTEGER NOT NULL,
+	"note" TEXT,
+	"create_at" TIMESTAMP NOT NULL,
+	"update_at" TIMESTAMP NOT NULL,
+	PRIMARY KEY("id"),
+	FOREIGN KEY ("user_id") REFERENCES "user"("id")
+	ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS "mood_emotions" (
+	"id" INTEGER NOT NULL UNIQUE,
+	"emotion_id" INTEGER NOT NULL,
+	"mood_id" INTEGER NOT NULL,
+	PRIMARY KEY("id"),
+	FOREIGN KEY ("emotion_id") REFERENCES "emotions"("id")
+	ON UPDATE NO ACTION ON DELETE NO ACTION,
+	FOREIGN KEY ("mood_id") REFERENCES "mood"("id")
+	ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS "activities" (
+	"id" INTEGER NOT NULL UNIQUE,
+	"name" VARCHAR NOT NULL,
+	PRIMARY KEY("id")
+);
