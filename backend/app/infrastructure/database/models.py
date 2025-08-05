@@ -5,6 +5,7 @@ from typing import List, Optional
 from sqlalchemy import ForeignKey, Integer, String, TIMESTAMP, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
+
 from sqlalchemy.ext.asyncio import AsyncAttrs
 
 
